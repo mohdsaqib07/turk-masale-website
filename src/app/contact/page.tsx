@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     toast.success("Message sent successfully! 🚀");
@@ -12,6 +14,7 @@ export default function ContactPage() {
     // Reset the form after submission
     const form = event.target as HTMLFormElement;
     form.reset();
+
     // event.target.reset();
   };
 
