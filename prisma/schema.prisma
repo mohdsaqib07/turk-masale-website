@@ -22,4 +22,21 @@ model Product {
   imageBack   String
   sizes       String  // e.g. "50g,100g,250g,500g"
   prices      String  // e.g. "20,40,90,180"
+  category   String @default("Masala")
+}
+
+model Order {
+  id             Int      @id @default(autoincrement())
+  fullName       String
+  phone          String
+  alternatePhone String?
+  pincode        String
+  city           String
+  landmark       String
+  fullAddress    String
+  addressType    String
+  orderSummary   String
+  status         String   @default("Pending") // ✅ New field!
+  createdAt      DateTime @default(now())
+
 }

@@ -142,11 +142,12 @@ export default function CartPage() {
               Clear Cart
             </button>
             <Link
-              href="/contact"
+              href="/checkout"
               className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition"
             >
               Proceed to Checkout
             </Link>
+
             <a
               href={`https://wa.me/919634749230?text=${generateWhatsAppMessage()}`}
               target="_blank"

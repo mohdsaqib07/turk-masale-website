@@ -6,6 +6,8 @@ import { useCart } from "@/context/CartContext";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Product {
   title: string;
@@ -26,8 +28,8 @@ export default function SingleProductPage({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<string>("");
-  const { addToCart } = useCart();
-
+  const { addToCart, clearCart } = useCart();
+  const router = useRouter();
   useEffect(() => {
     async function fetchProduct() {
       const res = await fetch(`/api/products/${slug}`);
@@ -161,10 +163,24 @@ export default function SingleProductPage({
               Add to Cart
             </button>
 
-            <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition">
+            <button
+              onClick={() => {
+                clearCart();
+                addToCart({
+                  slug: slug as string,
+                  title: product.title,
+                  size: selectedSize,
+                  price: selectedPrice,
+                  quantity: 1,
+                  image: product.imageFront,
+                });
+                router.push("/checkout");
+              }}
+              className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition"
+            >
               Order Now
             </button>
-            <a
+            <Link
               href={`https://wa.me/919634749230?text=${encodeURIComponent(
                 whatsappMessage
               )}`}
@@ -173,7 +189,7 @@ export default function SingleProductPage({
               className="bg-green-500 text-white px-6 py-3 rounded-lg text-center hover:bg-green-600 transition"
             >
               Order on WhatsApp
-            </a>
+            </Link>
           </div>
         </div>
       </div>

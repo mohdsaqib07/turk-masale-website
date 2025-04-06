@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 export function HeroSection() {
   return (
     <section className="relative  py-20 px-4 text-center overflow-hidden">
@@ -15,12 +14,16 @@ export function HeroSection() {
           heart of Uttar Pradesh to your kitchen. 🌶️
         </p>
         <div className="flex justify-center gap-4">
-          <button className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
-            Explore Our Spices
-          </button>
-          <button className="border border-red-600 text-red-600 px-6 py-3 rounded-lg hover:bg-red-600 hover:text-white transition">
-            Contact Us
-          </button>
+          <Link href="/products">
+            <button className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+              Explore Our Spices
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button className="border border-red-600 text-red-600 px-6 py-3 rounded-lg hover:bg-red-600 hover:text-white transition">
+              Contact Us
+            </button>
+          </Link>
         </div>
       </div>
     </section>
