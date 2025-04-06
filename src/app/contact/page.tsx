@@ -40,7 +40,7 @@ export default function ContactPage() {
 
         {/* Contact Form */}
         <form
-          action="https://formsubmit.co/mdsaqib941002@gmail.com"
+          action="https://formsubmit.co/mohdsaqib148183@gmail.com"
           method="POST"
           className="space-y-6 text-left"
           onSubmit={(event) => handleSubmit(event)}
