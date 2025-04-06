@@ -50,7 +50,7 @@ export default function ContactPage() {
           <input
             type="hidden"
             name="_next"
-            value="http://localhost:3000/thank-you"
+            value="https://turk-masale-website-bltncba0g-mohd-saqibs-projects.vercel.app/thank-you"
           />
 
           <input
