@@ -1,30 +1,31 @@
 "use client";
 
-import { useEffect, use, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { useRouter, useSearchParams } from "next/navigation";
 
-import { useRouter } from "next/navigation";
-export default function ConfirmationPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ message: string }>;
-}) {
-  const { message } = use(searchParams);
+export default function ConfirmationPage() {
   const { cart, clearCart } = useCart();
   const router = useRouter();
-  const whatsappMessage = message;
+  const searchParams = useSearchParams();
 
+  const [whatsappMessage, setWhatsappMessage] = useState<string | null>(null);
   const hasCopiedRef = useRef(false);
+
   useEffect(() => {
     if (cart.length === 0) {
       router.push("/");
     }
-  }, []);
+  }, [cart, router]);
+
   useEffect(() => {
-    if (whatsappMessage && !hasCopiedRef.current) {
+    const messageParam = searchParams.get("message");
+    if (messageParam && !hasCopiedRef.current) {
+      setWhatsappMessage(messageParam);
+      navigator.clipboard.writeText(decodeURIComponent(messageParam));
       hasCopiedRef.current = true;
     }
-  }, [whatsappMessage]);
+  }, [searchParams]);
 
   const handleWhatsAppRedirect = () => {
     if (whatsappMessage) {
