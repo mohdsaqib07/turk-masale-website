@@ -1,21 +1,56 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
-    toast.success("Message sent successfully! 🚀");
 
-    // Reset the form after submission
-    const form = event.target as HTMLFormElement;
-    form.reset();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    // event.target.reset();
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Message sent successfully! 🚀");
+        setForm({ name: "", email: "", message: "" });
+
+        // ✅ Redirect after a short delay for better UX
+        setTimeout(() => {
+          router.push("/thank-you");
+        }, 1000);
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,25 +74,14 @@ export default function ContactPage() {
         </motion.p>
 
         {/* Contact Form */}
-        <form
-          action="https://formsubmit.co/mdsaqib941002@gmail.com"
-          method="POST"
-          className="space-y-6 text-left"
-          onSubmit={(event) => handleSubmit(event)}
-        >
-          {/* Hidden Inputs */}
-          <input type="hidden" name="_captcha" value="false" />
-          <input
-            type="hidden"
-            name="_next"
-            value="https://turk-masale-website-bltncba0g-mohd-saqibs-projects.vercel.app/thank-you"
-          />
-
+        <form onSubmit={handleSubmit} className="space-y-6 text-left">
           <input
             type="text"
             name="name"
             required
             placeholder="Your Name"
+            value={form.name}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
           />
           <input
@@ -65,12 +89,16 @@ export default function ContactPage() {
             name="email"
             required
             placeholder="Your Email"
+            value={form.email}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
           />
           <textarea
             name="message"
             required
             placeholder="Your Message"
+            value={form.message}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
             rows={4}
           ></textarea>
@@ -82,7 +110,7 @@ export default function ContactPage() {
               loading ? "cursor-not-allowed bg-red-400" : "hover:bg-red-700"
             }`}
           >
-            {loading ? (
+            {loading && (
               <svg
                 className="animate-spin h-5 w-5 mr-2 text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,10 +131,12 @@ export default function ContactPage() {
                   d="M4 12a8 8 0 018-8v8H4z"
                 ></path>
               </svg>
-            ) : null}
+            )}
             {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
+
+        {/* WhatsApp */}
         <div className="mt-8">
           <a
             href="https://wa.me/919634749230"
@@ -125,6 +155,7 @@ export default function ContactPage() {
           </a>
         </div>
 
+        {/* Google Map */}
         <div className="mt-12">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3564.2944194559096!2d79.11735257448363!3d28.038127175963245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399e3064dfb3c3e5%3A0x9c0c57d390d05f9b!2sBudaun%2C%20Uttar%20Pradesh%20243601!5e0!3m2!1sen!2sin!4v1712134212492!5m2!1sen!2sin"

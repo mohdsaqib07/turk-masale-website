@@ -1,5 +1,3 @@
-"use client";
-
 import ProductCard from "./ProductCard";
 import redChilli from "@/productphotos/red-chilli.png";
 import turmeric from "@/productphotos/turmeric.png";
