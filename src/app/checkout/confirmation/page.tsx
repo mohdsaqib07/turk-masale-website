@@ -16,7 +16,7 @@ export default function ConfirmationPage() {
     if (cart.length === 0) {
       router.push("/");
     }
-  }, [cart, router]);
+  }, []);
 
   useEffect(() => {
     const messageParam = searchParams.get("message");
