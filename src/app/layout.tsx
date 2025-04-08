@@ -15,7 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Turk Masale - Pure & Spicy Since 1978",
+  title: {
+    default: "Turk Masale - Pure & Spicy Since 1978",
+    template: "%s | Turk Masale",
+  },
   description: "Premium Indian spices delivered with purity and passion.",
 };
 
