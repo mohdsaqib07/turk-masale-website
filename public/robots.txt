@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://turk-masale.vercel.app/sitemap.xml
