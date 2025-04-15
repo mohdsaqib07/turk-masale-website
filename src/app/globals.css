@@ -6,3 +6,54 @@
   --color-accent: #a8dadc; /* Fresh accent */
   --color-dark: #1d3557; /* Text color */
 }
+
+@layer base {
+  .border-animation {
+    position: relative;
+  }
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  /* css variables are not animatable */
+  .border-animation::after,
+  .border-animation::before {
+    content: "";
+    position: absolute;
+    /* background-image: conic-gradient(from var(--angle), transparent 90%, blue); */
+    background-image: conic-gradient(
+      from var(--angle),
+      transparent 80%,
+      #c44138,
+      #dca324,
+      #2a4f13,
+      #5d2f08
+    );
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    padding: 8px;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    animation-name: spinBorder;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+  .border-animation::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+
+  @keyframes spinBorder {
+    from {
+      --angle: 0deg;
+    }
+    to {
+      --angle: 360deg;
+    }
+  }
+}
