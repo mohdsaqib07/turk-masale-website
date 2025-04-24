@@ -24,18 +24,19 @@
     /* background-image: conic-gradient(from var(--angle), transparent 90%, blue); */
     background-image: conic-gradient(
       from var(--angle),
-      transparent 80%,
-      #c44138,
-      #dca324,
-      #2a4f13,
-      #5d2f08
+      #fc028d,
+      #e6c134,
+      #30e634,
+      #0c0a4f,
+      #00e3ff,
+      #ea0e0f
     );
     height: 100%;
     width: 100%;
     top: 50%;
     left: 50%;
     z-index: -1;
-    padding: 8px;
+    padding: 4px;
     transform: translate(-50%, -50%);
     border-radius: 4px;
     animation-name: spinBorder;
@@ -44,8 +45,8 @@
     animation-timing-function: linear;
   }
   .border-animation::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
+    filter: blur(2rem);
+    opacity: 1;
   }
 
   @keyframes spinBorder {
