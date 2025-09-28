@@ -22,7 +22,7 @@ export default function ProductCard({
             src={image}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+            className="object-contain group-hover:scale-105 transition-transform duration-500 ease-in-out"
             loading="lazy"
             placeholder="blur"
             blurDataURL="/blur-background.png" // ✅ Create a blurred placeholder or use image CDN base64
