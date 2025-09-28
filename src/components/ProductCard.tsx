@@ -2,19 +2,17 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { type StaticImageData } from "next/image";
 interface ProductCardProps {
   title: string;
   description: string;
-  image: string;
-  slug: string;
+  image: StaticImageData;
 }
 
 export default function ProductCard({
   title,
   description,
   image,
-  slug,
 }: ProductCardProps) {
   return (
     <div className="border-animation p-1 w-fit">
@@ -32,11 +30,8 @@ export default function ProductCard({
         </div>
 
         <div className="p-4">
-          <Link href={`/products/${slug}`}>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-              {title}
-            </h3>
-          </Link>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
+
           <p className="text-gray-600 text-sm">{description}</p>
         </div>
       </motion.div>
