@@ -68,7 +68,7 @@ export default function Navbar() {
             className="object-contain"
           />
           <span className="text-xl font-bold text-red-600 dark:text-red-500">
-         Catch Masale
+        Turk Masale
           </span>
         </Link>
 
