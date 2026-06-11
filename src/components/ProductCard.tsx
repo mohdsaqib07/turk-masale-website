@@ -15,7 +15,7 @@ export default function ProductCard({
   image,
 }: ProductCardProps) {
   return (
-    <div className="border-animation p-1 w-fit">
+    <div className="border-animation p-1 w-fit flex-[1]">
       <motion.div className="bg-white  rounded-lg max-w-md   mx-auto relative shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300">
         <div className="relative   w-full h-48 overflow-hidden">
           <Image
